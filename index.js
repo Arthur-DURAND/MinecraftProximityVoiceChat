@@ -3,7 +3,7 @@ var app = express();
 
 let players = {}
 
-app.get('/playerjoined', function (req, res) {
+app.get('/player-joined', function (req, res) {
    // TODO check ip is minecraft server
    let username = req.query.username
    if(username){
@@ -22,8 +22,9 @@ app.get('/playerjoined', function (req, res) {
       }
       players[username] = id
       res.send("{id:"+id+"}")
+   } else {
+      res.status(400).send({message: 'You must provide a username!'})
    }
-
 })
 
 app.get('/proximity-chat', function (req, res) {
@@ -38,6 +39,14 @@ app.get('/proximity-chat', function (req, res) {
    if(!validId){
       res.send('Wrong id');
    }
+})
+
+app.get('/test', function (req, res) {
+   res.sendFile('index.html', {root: __dirname })
+})
+
+app.get('/favicon.ico', function (req, res) {
+   res.sendFile('favicon.ico', {root: __dirname })
 })
 
 var server = app.listen(3000, function () {

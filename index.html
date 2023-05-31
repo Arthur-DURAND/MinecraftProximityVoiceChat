@@ -1,0 +1,25 @@
+<h1>Hello world!</h1>
+<audio id="sound">
+
+<script>
+    let soundEl = document.getElementById("sound")
+
+    let constraints = {
+        audio: true,
+        video: false,
+    }
+    async function getMedia() {
+        let stream = null;
+
+        try {
+   
+            stream = await navigator.mediaDevices.getUserMedia(constraints);
+            soundEl.srcObject = stream;
+            soundEl.play();
+            /* use the stream */
+        } catch (err) {
+            /* handle the error */
+        }
+    }
+    getMedia()
+</script>
